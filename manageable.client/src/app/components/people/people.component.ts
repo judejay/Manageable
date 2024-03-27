@@ -37,6 +37,9 @@ export class PeopleComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.getPeople();
+    this._peopleService.personAdded.subscribe(() => {
+      this.getPeople();
+    });
   }
 
   getPeople() {
@@ -44,7 +47,7 @@ export class PeopleComponent implements OnInit {
 
     this._peopleService.getPeople().subscribe({
       next: (res) => {
-        console.log('res', res);
+        console.log('res of people', res);
         this.dataSource = new MatTableDataSource(res);
 
         this.dataSource.sort = this.sort;
@@ -55,12 +58,15 @@ export class PeopleComponent implements OnInit {
   }
 
   openEditForm(data: Person) {
+    console.log('openEditForm', data);
     const dialogRef = this._dialog.open(FormComponent, {
       data,
     });
     dialogRef.afterClosed().subscribe({
       next: (val) => {
+        console.log('before closed val', val);
         if (val) {
+          console.log('after closed val', val);
           this.getPeople();
         }
       },

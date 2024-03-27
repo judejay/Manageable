@@ -28,11 +28,7 @@ namespace Manageable.Server.Controllers
         {
             _logger.LogInformation("Getting all people");
             var people = await _context.People.ToListAsync();
-            foreach (var person in people)
-            {
-                //caclulate age
-                person.Age = DateTime.Now.Year - person.DateOfBirth.Year;
-            }
+
             return Ok(people);
         }
 
@@ -59,6 +55,7 @@ namespace Manageable.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<List<Person>>> Create(Person person)
         {
+            Console.WriteLine("Creating person");
             if (ModelState.IsValid)
             {
                 _context.Add(person);

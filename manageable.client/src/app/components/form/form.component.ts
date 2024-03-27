@@ -8,6 +8,7 @@ import {
 import { PersonService } from '../../person.service';
 import { Person } from '../../app.component';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { CoreService } from '../../services/core.service';
 
 @Component({
   selector: 'app-form',
@@ -22,8 +23,9 @@ export class FormComponent {
 
   constructor(
     private fb: FormBuilder,
+    private _coreService: CoreService, // private personService: PersonService,
     private personService: PersonService,
-    private _dialogRef: MatDialogRef<FormComponent>,
+    public _dialogRef: MatDialogRef<FormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Person
   ) {
     this.personForm = this.fb.group({
@@ -32,25 +34,39 @@ export class FormComponent {
       surname: new FormControl('', Validators.required),
       dateOfBirth: new FormControl('', Validators.required),
       sex: new FormControl('', Validators.required),
-      age: new FormControl('', Validators.required),
     });
   }
 
   onClose() {
-    this.onCloseModal.emit(false);
+    console.log('onClose');
+    this._dialogRef.close();
   }
 
   onFormSubmit() {
-    console.log(this.personForm.value);
+    console.log('form value on submit ', this.personForm.value);
+    // const res = this.personForm.value; subit , this.personForm.value;
     if (this.personForm.valid) {
-      this.personService.addPerson(this.personForm.value).subscribe((res) => {
-        console.log(res);
+      console.log('form valid');
+      this.personService.addPerson(this.personForm.value).subscribe({
+        next: () => {
+          this._coreService.openSnackBar('Person added successfully', 'Close');
+          this._dialogRef.close(true);
+          this.personForm.reset();
+        },
+        error: (err: unknown) => {
+          console.log(err);
+        },
+      });
+
+      /*       console.log('res sub', res);
       });
       this.onCloseModal.emit(true);
       this.personForm.reset();
       this.onCloseModal.emit(false);
     } else {
       this.personForm.markAllAsTouched();
+    }
+  } */
     }
   }
 }

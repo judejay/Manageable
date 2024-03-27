@@ -30,11 +30,15 @@ export class AppComponent {
   ) {}
 
   getPeople() {
+    console.log('getPeople in app');
     this.personService.getPeople().subscribe({
       next: (res) => {
+        console.log('res next', res);
         this.people = res;
       },
-      error: (err) => console.log('Error', err),
+      error: (err) => {
+        console.error('Error in getPeople:', err);
+      },
     });
   }
 
@@ -44,6 +48,7 @@ export class AppComponent {
     dialogRef.afterClosed().subscribe({
       next: (val) => {
         if (val) {
+          console.log('val', val);
           this.getPeople();
         }
       },
