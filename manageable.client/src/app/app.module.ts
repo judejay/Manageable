@@ -17,6 +17,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [AppComponent, PersonComponent, FormComponent, ModalComponent],
@@ -33,6 +34,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatRadioModule,
     MatButtonModule,
     MatSelectModule,
+    MatInputModule,
   ],
   providers: [provideAnimationsAsync()],
   bootstrap: [AppComponent],

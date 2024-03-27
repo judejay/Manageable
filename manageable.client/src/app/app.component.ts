@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
   }
 
   title = 'manageable.client';
-  openAddEditEmpForm() {
+  openPersonForm() {
     const dialogRef = this._dialog.open(FormComponent);
     dialogRef.afterClosed().subscribe({
       next: (val) => {

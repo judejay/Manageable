@@ -5,21 +5,13 @@
   <div mat-dialog-content class="content">
     <div class="row">
       <mat-form-field appearance="outline">
-        <mat-label>First name</mat-label>
-        <input
-          matInput
-          type="text"
-          placeholder="Ex. Technical"
-          formControlName="firstName"
-        />
+        <mat-label>Title</mat-label>
+        <mat-select formControlName="title">
+          <mat-option *ngFor="let val of titles" [value]="val">
+            {{ val }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Surname</mat-label>
-        <input matInput placeholder="Ex. Babaji" formControlName="surname" />
-      </mat-form-field>
-    </div>
-
-    <div class="row">
       <mat-form-field appearance="outline">
         <mat-label>Date of birth</mat-label>
         <input
@@ -35,6 +27,23 @@
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
     </div>
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>First name</mat-label>
+        <input
+          matInput
+          type="text"
+          placeholder="eg. Jon"
+          formControlName="firstName"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Surname</mat-label>
+        <input matInput placeholder="eg. Doe" formControlName="surname" />
+      </mat-form-field>
+    </div>
+
+    <div class="row"></div>
 
     <div class="row">
       <mat-radio-group aria-label="Select an option" formControlName="sex">
@@ -43,17 +52,6 @@
         <mat-radio-button value="female">Female</mat-radio-button>
         <mat-radio-button value="others">Others</mat-radio-button>
       </mat-radio-group>
-    </div>
-
-    <div class="row">
-      <mat-form-field appearance="outline">
-        <mat-label>Title</mat-label>
-        <mat-select formControlName="title">
-          <mat-option *ngFor="let val of titles" [value]="val">
-            {{ val }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
     </div>
   </div>
   <div mat-dialog-actions class="action">
