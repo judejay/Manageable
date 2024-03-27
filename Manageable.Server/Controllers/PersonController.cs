@@ -15,7 +15,7 @@ namespace Manageable.Server.Controllers
     public class PersonController : ControllerBase
     {
         private readonly PersonContext _context;
-     
+
         private readonly ILogger<PersonController> _logger;
         public PersonController(PersonContext context, ILogger<PersonController> logger)
         {
@@ -28,15 +28,16 @@ namespace Manageable.Server.Controllers
         {
             _logger.LogInformation("Getting all people");
             var people = await _context.People.ToListAsync();
-            foreach (var person in people) {
-             //caclulate age
-            person.Age = DateTime.Now.Year - person.DateOfBirth.Year;
+            foreach (var person in people)
+            {
+                //caclulate age
+                person.Age = DateTime.Now.Year - person.DateOfBirth.Year;
             }
             return Ok(people);
         }
 
         [HttpGet]
-        [Route( "{id}")]
+        [Route("{id}")]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -56,23 +57,23 @@ namespace Manageable.Server.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<List<Person>>> Create( Person person)
+        public async Task<ActionResult<List<Person>>> Create(Person person)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(person);
                 await _context.SaveChangesAsync();
-                
 
-                 
+
+
             }
             return Ok(await _context.People.ToListAsync());
         }
 
         [HttpPut]
-        public async Task<ActionResult> Edit( Person updatedPerson)
+        public async Task<ActionResult> Edit(Person updatedPerson)
         {
-            
+
 
             if (ModelState.IsValid)
             {
@@ -83,7 +84,7 @@ namespace Manageable.Server.Controllers
                     {
                         return NotFound();
                     }
-                       
+
                     dbPerson.Title = updatedPerson.Title;
                     dbPerson.FirstName = updatedPerson.FirstName;
                     dbPerson.Surname = updatedPerson.Surname;
@@ -105,10 +106,10 @@ namespace Manageable.Server.Controllers
             }
             return Ok(updatedPerson);
         }
-
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<List<Person>>> DeleteConfirmed(int id)
         {
+            _logger.LogInformation("Deleting person " + id);
             var person = await _context.People.FindAsync(id);
             if (person != null)
             {
@@ -119,10 +120,9 @@ namespace Manageable.Server.Controllers
             await _context.SaveChangesAsync();
             return Ok(await _context.People.ToListAsync());
         }
-
         private bool PersonExists(int id)
-         {
-             return _context.People.Any(e => e.Id == id);
-         }
+        {
+            return _context.People.Any(e => e.Id == id);
+        }
     }
 }

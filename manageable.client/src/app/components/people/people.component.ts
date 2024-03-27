@@ -68,6 +68,8 @@ export class PeopleComponent implements OnInit {
   }
 
   deletePerson(id: number) {
+    console.log('deletePerson', id);
+
     this._peopleService.deletePerson(id).subscribe({
       next: (res) => {
         console.log(res);
