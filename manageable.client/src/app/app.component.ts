@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { PersonService } from './person.service';
 import { MatDialog } from '@angular/material/dialog';
 import { FormComponent } from './components/form/form.component';
@@ -21,7 +21,7 @@ export interface ApiResponse<T> {
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   public people: Person[] = [];
   API_URL = 'http://localhost:5187/api/Person';
   constructor(
@@ -29,13 +29,12 @@ export class AppComponent implements OnInit {
     private _dialog: MatDialog
   ) {}
 
-  ngOnInit() {
-    this.getPeople();
-  }
   getPeople() {
-    this.personService.getPeople().subscribe((res) => {
-      console.log(res);
-      this.people = res;
+    this.personService.getPeople().subscribe({
+      next: (res) => {
+        this.people = res;
+      },
+      error: (err) => console.log('Error', err),
     });
   }
 

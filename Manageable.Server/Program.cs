@@ -20,11 +20,7 @@ builder.Services.AddCors(options =>
                           .AllowAnyMethod());
 });
 
-// ...
 
-
-
-// ...
 builder.Services.AddMvc();
 
 var app = builder.Build();

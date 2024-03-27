@@ -2,18 +2,51 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Person } from './app.component';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PersonService {
-  API_URL!: 'http://localhost:5187/api/Person';
+  API_URL = 'http://localhost:5187/api/Person';
   people: Person[] = [];
 
   constructor(private http: HttpClient) {}
 
   getPeople(): Observable<Person[]> {
-    return this.http.get<Person[]>(this.API_URL);
+    console.log('service get people');
+    console.log(this.API_URL);
+    console.log(this.people);
+    console.log(this.http);
+    console.log(this.http.get<Person[]>(this.API_URL));
+    console.log(
+      this.http
+        .get<Person[]>(this.API_URL)
+        .pipe(tap((data) => console.log('service data', data)))
+    );
+    console.log(
+      this.http
+        .get<Person[]>(this.API_URL)
+        .pipe(tap((data) => console.log('service data', data)))
+    );
+    console.log(
+      this.http
+        .get<Person[]>(this.API_URL)
+        .pipe(tap((data) => console.log('service data', data)))
+    );
+    console.log(
+      this.http
+        .get<Person[]>(this.API_URL)
+        .pipe(tap((data) => console.log('service data', data)))
+    );
+    console.log(
+      this.http
+        .get<Person[]>(this.API_URL)
+        .pipe(tap((data) => console.log('service data', data)))
+    );
+    return this.http
+      .get<Person[]>(this.API_URL)
+      .pipe(tap((data) => console.log('service data', data)));
   }
 
   addPerson(person: Person): Observable<Person> {

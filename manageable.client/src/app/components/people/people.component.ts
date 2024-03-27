@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { PersonService } from '../../person.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { Person } from '../../app.component';
@@ -13,7 +13,7 @@ import { CoreService } from '../../services/core.service';
   templateUrl: './people.component.html',
   styleUrl: './people.component.css',
 })
-export class PeopleComponent {
+export class PeopleComponent implements OnInit {
   dataSource!: MatTableDataSource<Person>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -32,15 +32,21 @@ export class PeopleComponent {
     private _dialog: MatDialog,
     private _coreService: CoreService
   ) {}
+  ngOnInit(): void {
+    this.getPeople();
+  }
 
   getPeople() {
+    console.log('getPeople');
+
     this._peopleService.getPeople().subscribe({
       next: (res) => {
+        console.log('res', res);
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       },
-      error: console.log,
+      error: (err) => console.log('Error', err),
     });
   }
 

@@ -26,6 +26,7 @@ namespace Manageable.Server.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Person>>> GetAllPeople()
         {
+            _logger.LogInformation("Getting all people");
             var people = await _context.People.ToListAsync();
             return Ok(people);
         }
