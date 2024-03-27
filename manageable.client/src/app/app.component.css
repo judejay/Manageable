@@ -1,22 +1,17 @@
-﻿:host {
-    max-width: 1280px;
-    padding: 2rem;
-    text-align: center;
+﻿.example-spacer {
+  flex: 1 1 auto;
 }
 
-tr:nth-child(even) {
-    background: #F2F2F2;
+.main-body {
+  padding-top: 20px;
+  margin: 0 auto;
+  max-width: 1348px;
+  mat-form-field {
+    width: 100%;
+  }
 }
 
-tr:nth-child(odd) {
-    background: #FFF;
-}
-
-th, td {
-    padding-left: 1rem;
-    padding-right: 1rem;
-}
-
-table {
-    margin: 0 auto;
+.action {
+  display: flex;
+  gap: 5px;
 }
