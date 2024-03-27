@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -15,7 +22,7 @@ import { CoreService } from '../../services/core.service';
   templateUrl: './form.component.html',
   styleUrl: './form.component.css',
 })
-export class FormComponent {
+export class FormComponent implements OnInit {
   @Input() person: Person | null = null;
   @Output() onCloseModal = new EventEmitter<boolean>();
   personForm!: FormGroup;
@@ -36,6 +43,15 @@ export class FormComponent {
       sex: new FormControl('', Validators.required),
     });
   }
+  ngOnInit(): void {
+    this.personForm = this.fb.group({
+      firstName: [this.data.firstName],
+      dateOfBirth: [this.data.dateOfBirth],
+      surname: [this.data.surname],
+      title: [this.data.title],
+      sex: [this.data.sex],
+    });
+  }
 
   onClose() {
     console.log('onClose');
@@ -50,8 +66,8 @@ export class FormComponent {
       this.personService.addPerson(this.personForm.value).subscribe({
         next: () => {
           this._coreService.openSnackBar('Person added successfully', 'Close');
-          this._dialogRef.close(true);
           this.personForm.reset();
+          this._dialogRef.close(true);
         },
         error: (err: unknown) => {
           console.log(err);
