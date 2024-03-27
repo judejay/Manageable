@@ -17,9 +17,15 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import { PeopleComponent } from './components/people/people.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
-  declarations: [AppComponent, PersonComponent, FormComponent],
+  declarations: [AppComponent, PersonComponent, FormComponent, PeopleComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -34,6 +40,11 @@ import { MatInputModule } from '@angular/material/input';
     MatButtonModule,
     MatSelectModule,
     MatInputModule,
+    MatTableModule,
+    MatIconModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatSnackBarModule,
   ],
   providers: [provideAnimationsAsync()],
   bootstrap: [AppComponent],
