@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { PersonComponent } from './components/person/person.component';
 import { FormComponent } from './components/form/form.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ModalComponent } from './modal/modal.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -20,7 +19,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
-  declarations: [AppComponent, PersonComponent, FormComponent, ModalComponent],
+  declarations: [AppComponent, PersonComponent, FormComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
