@@ -28,6 +28,10 @@ namespace Manageable.Server.Controllers
         {
             _logger.LogInformation("Getting all people");
             var people = await _context.People.ToListAsync();
+            foreach (var person in people) {
+             //caclulate age
+            person.Age = DateTime.Now.Year - person.DateOfBirth.Year;
+            }
             return Ok(people);
         }
 
