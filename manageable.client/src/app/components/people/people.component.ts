@@ -20,12 +20,14 @@ export class PeopleComponent implements OnInit {
 
   displayedColumns: string[] = [
     'id',
+    'title',
     'firstName',
     'surname',
     'dateOfBirth',
     'sex',
-    'title',
+
     'age',
+    'actions',
   ];
 
   constructor(
