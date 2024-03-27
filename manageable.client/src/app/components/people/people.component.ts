@@ -25,6 +25,7 @@ export class PeopleComponent implements OnInit {
     'dateOfBirth',
     'sex',
     'title',
+    'age',
   ];
 
   constructor(
@@ -43,6 +44,7 @@ export class PeopleComponent implements OnInit {
       next: (res) => {
         console.log('res', res);
         this.dataSource = new MatTableDataSource(res);
+
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       },
