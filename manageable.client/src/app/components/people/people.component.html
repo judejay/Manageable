@@ -1,4 +1,9 @@
 <div class="main-body">
+  <div class="example-spacer">
+    <button color="primary" mat-stroked-button (click)="openPersonForm()">
+      ADD PERSON
+    </button>
+  </div>
   <div class="table-container">
     <table mat-table [dataSource]="dataSource" matSort>
       <!-- ID Column -->

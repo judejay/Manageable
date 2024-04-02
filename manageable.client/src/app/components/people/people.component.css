@@ -2,3 +2,7 @@
   display: flex;
   gap: 5px;
 }
+.example-spacer {
+  margin-top: 10px;
+  flex: 1 1 auto;
+}

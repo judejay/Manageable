@@ -15,6 +15,17 @@ import { Router } from '@angular/router';
   styleUrl: './people.component.css',
 })
 export class PeopleComponent implements OnInit {
+  openPersonForm() {
+    const dialogRef = this._dialog.open(FormComponent);
+    dialogRef.afterClosed().subscribe({
+      next: (val) => {
+        if (val) {
+          console.log('val', val);
+          this.getPeople();
+        }
+      },
+    });
+  }
   dataSource!: MatTableDataSource<Person>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;

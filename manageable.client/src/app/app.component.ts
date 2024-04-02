@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { PersonService } from './person.service';
 import { MatDialog } from '@angular/material/dialog';
-import { FormComponent } from './components/form/form.component';
 
 export interface Person {
   id: number;
@@ -43,15 +42,4 @@ export class AppComponent {
   }
 
   title = 'manageable.client';
-  openPersonForm() {
-    const dialogRef = this._dialog.open(FormComponent);
-    dialogRef.afterClosed().subscribe({
-      next: (val) => {
-        if (val) {
-          console.log('val', val);
-          this.getPeople();
-        }
-      },
-    });
-  }
 }
