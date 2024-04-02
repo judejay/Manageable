@@ -30,7 +30,7 @@ export class FormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private _coreService: CoreService, // private personService: PersonService,
+    private _coreService: CoreService,
     private personService: PersonService,
     public _dialogRef: MatDialogRef<FormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Person
@@ -60,7 +60,6 @@ export class FormComponent implements OnInit {
 
   onFormSubmit() {
     console.log('form value on submit ', this.personForm.value);
-    // const res = this.personForm.value; subit , this.personForm.value;
     if (this.personForm.valid) {
       console.log('form valid');
       this.personService.addPerson(this.personForm.value).subscribe({
@@ -73,16 +72,6 @@ export class FormComponent implements OnInit {
           console.log(err);
         },
       });
-
-      /*       console.log('res sub', res);
-      });
-      this.onCloseModal.emit(true);
-      this.personForm.reset();
-      this.onCloseModal.emit(false);
-    } else {
-      this.personForm.markAllAsTouched();
-    }
-  } */
     }
   }
 }

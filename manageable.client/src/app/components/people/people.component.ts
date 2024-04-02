@@ -7,6 +7,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { FormComponent } from '../form/form.component';
 import { CoreService } from '../../services/core.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-people',
@@ -33,7 +34,8 @@ export class PeopleComponent implements OnInit {
   constructor(
     private _peopleService: PersonService,
     private _dialog: MatDialog,
-    private _coreService: CoreService
+    private _coreService: CoreService,
+    private router: Router
   ) {}
   ngOnInit(): void {
     this.getPeople();
@@ -85,5 +87,11 @@ export class PeopleComponent implements OnInit {
       },
       error: console.log,
     });
+  }
+
+  openPersonDetails(id: number) {
+    // console.log('openPersonDetails', id);
+    this.router.navigate(['person', id]);
+    //navigate to person component
   }
 }
