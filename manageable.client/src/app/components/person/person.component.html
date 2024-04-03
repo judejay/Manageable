@@ -1,8 +1,18 @@
-<div class="container">
-  <p>Title {{ person.title }}</p>
-  <p>First name {{ person.firstName }}</p>
-  <p>Surname {{ person.surname }}</p>
-  <p>Date of birth {{ person.dateOfBirth }}</p>
-  <p>Age {{ person.age }}</p>
-  <p>Sex {{ person.sex }}</p>
-</div>
+<mat-card class="person-card">
+  <mat-card-header>
+    <mat-card-title
+      >{{ person.title }} {{ person.firstName }}
+      {{ person.surname }}</mat-card-title
+    >
+    <mat-card-subtitle></mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>Date of birth {{ person.dateOfBirth }}</p>
+    <p>Age {{ person.age }}</p>
+    <p>Sex {{ person.sex }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button>LIKE</button>
+    <button mat-button>SHARE</button>
+  </mat-card-actions>
+</mat-card>

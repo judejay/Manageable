@@ -23,6 +23,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [AppComponent, PersonComponent, FormComponent, PeopleComponent],
@@ -46,6 +47,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatPaginatorModule,
     MatSortModule,
     MatSnackBarModule,
+    MatCardModule,
   ],
   providers: [provideAnimationsAsync()],
   bootstrap: [AppComponent],
