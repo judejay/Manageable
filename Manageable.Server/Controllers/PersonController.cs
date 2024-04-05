@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Manageable.Server.Data;
 using Manageable.Server.Model;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Manageable.Server.Controllers
 {
@@ -67,8 +68,8 @@ namespace Manageable.Server.Controllers
             return Ok(await _context.People.ToListAsync());
         }
 
-        [HttpPut]
-        public async Task<ActionResult> Edit(Person updatedPerson)
+        [HttpPut("{Id}")]
+        public async Task<ActionResult> Edit(Int32 Id, Person updatedPerson)
         {
 
 
@@ -76,7 +77,7 @@ namespace Manageable.Server.Controllers
             {
                 try
                 {
-                    var dbPerson = await _context.People.FindAsync(updatedPerson.Id);
+                    var dbPerson = await _context.People.FindAsync(Id);
                     if (dbPerson == null)
                     {
                         return NotFound();
@@ -87,6 +88,7 @@ namespace Manageable.Server.Controllers
                     dbPerson.Surname = updatedPerson.Surname;
                     dbPerson.DateOfBirth = updatedPerson.DateOfBirth;
                     ;
+                    _context.Entry(dbPerson).State = EntityState.Modified;
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

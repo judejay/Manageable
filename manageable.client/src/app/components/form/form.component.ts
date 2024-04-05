@@ -45,6 +45,7 @@ export class FormComponent implements OnInit {
   }
   ngOnInit(): void {
     this.personForm = this.fb.group({
+      id: [this.data.id],
       firstName: [this.data.firstName],
       dateOfBirth: [this.data.dateOfBirth],
       surname: [this.data.surname],
@@ -62,16 +63,40 @@ export class FormComponent implements OnInit {
     console.log('form value on submit ', this.personForm.value);
     if (this.personForm.valid) {
       console.log('form valid');
-      this.personService.addPerson(this.personForm.value).subscribe({
-        next: () => {
-          this._coreService.openSnackBar('Person added successfully', 'Close');
-          this.personForm.reset();
-          this._dialogRef.close(true);
-        },
-        error: (err: unknown) => {
-          console.log(err);
-        },
-      });
+      console.log('values', this.personForm.value);
+      if (!this.data?.id) {
+        console.log('no id');
+
+        this.personService.addPerson(this.personForm.value).subscribe({
+          next: () => {
+            this._coreService.openSnackBar(
+              'Person added successfully',
+              'Close'
+            );
+            this.personForm.reset();
+            this._dialogRef.close(true);
+          },
+          error: (err: unknown) => {
+            console.log(err);
+          },
+        });
+      } else {
+        this.personService.updatePerson(this.personForm.value).subscribe({
+          next: () => {
+            this._coreService.openSnackBar(
+              'Person updated successfully',
+              'Close'
+            );
+            this.personForm.reset();
+            this._dialogRef.close(true);
+          },
+          error: (err: unknown) => {
+            console.log(err);
+          },
+        });
+      }
+    } else {
+      console.log('form invalid', this.personForm.value);
     }
   }
 }
