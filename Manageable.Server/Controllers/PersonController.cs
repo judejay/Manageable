@@ -87,6 +87,7 @@ namespace Manageable.Server.Controllers
                     dbPerson.FirstName = updatedPerson.FirstName;
                     dbPerson.Surname = updatedPerson.Surname;
                     dbPerson.DateOfBirth = updatedPerson.DateOfBirth;
+                    dbPerson.Sex = updatedPerson.Sex;
                     ;
                     _context.Entry(dbPerson).State = EntityState.Modified;
                     await _context.SaveChangesAsync();
